@@ -1,0 +1,38 @@
+ * {
+    padding: 30;
+    margin: 30;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    
+    }
+.cont_cards {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-auto-rows:200px;
+    grid-gap: 20px;
+    align-items: center;
+    justify-items: center;
+    } 
+.form {
+    background-color: pink;
+    font-family: "Roboto", sans-serif;
+    }
+body {
+    background-color: #161616;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    }
+img{
+    height: 200px;
+    width: 200px;
+    }
+.card{
+    display: flex;
+    }
+.secondClass {   
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 10px;
+    grid-gap: 10px;
+    align-items: center;
+    justify-items: center;
+    }
