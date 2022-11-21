@@ -1,6 +1,4 @@
-import * as Vue from './vue.js';
-
-;
+import * as Vue from "./vue.js";
 
 Vue.createApp({
     data() {
@@ -8,44 +6,30 @@ Vue.createApp({
             headline: "New Instegram",
             cardCSS: "all_cards",
             images: [],
-            
+
             //firstName: "",
             //headlineCss: "headlineClass",
             //count: 0,
-        }
+        };
     },
-   
-   mounted() {
-        fetch("/images").then(res => res.json()).then(images => {
-            this.images = images;
-        })
-    }
-}).mount('#main');
+    methods: {
+        uploadImage: function (e) {
+            const file = document.querySelector("input[type=file]").files[0];
+            const formData = new FormData();
 
-
-
-/*
- methods: {
-        updateName: function (e) {
-            this.firstName = "Sven";
+            formData.append("file", file);
+            fetch("/images", {
+                method: "POST",
+                body: formData,
+            });
         },
-        increaseCount: function () {
-            this.count++;
-        }
+    },
 
-    }
-    
-    const images = [
-    {
-        name: "Paris",
-        country: "France"
+    mounted() {
+        fetch("/images")
+            .then((res) => res.json())
+            .then((images) => {
+                this.images = images;
+            });
     },
-    {
-        name: "Lisboa",
-        country: "Portugal"
-    },
-    {
-        name: "Berlin",
-        country: "Germany"
-    }
-],*/
+}).mount("#main");

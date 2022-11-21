@@ -1,4 +1,4 @@
 co = checkout
-        ci = commit
-        st = status
-        br = branch
+ci = commit
+st = status
+br = branch
