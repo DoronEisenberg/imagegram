@@ -3,10 +3,12 @@ import * as Vue from "./vue.js";
 Vue.createApp({
     data() {
         return {
-            headline: "New Instegram",
-            cardCSS: "all_cards",
             images: [],
-
+            title: "",
+            description: "",
+            username: "",
+            //headline: "New Instegram",
+            //cardCSS: "all_cards",
             //firstName: "",
             //headlineCss: "headlineClass",
             //count: 0,
@@ -18,6 +20,11 @@ Vue.createApp({
             const formData = new FormData();
 
             formData.append("file", file);
+            formData.append("title", this.title);
+            formData.append("description", this.description);
+            formData.append("username", this.username);
+
+            console.log("this.username", this.username);
             fetch("/images", {
                 method: "POST",
                 body: formData,

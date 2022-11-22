@@ -6,6 +6,7 @@ const { PORT = 8000 } = process.env;
 const { getImage } = require("./db");
 const { s3 } = require("./s3.js");
 const fs = require("fs");
+const db = require("./db");
 app.use(express.static(path.join(__dirname, "./public")));
 app.use(express.static(path.join(__dirname, "./upload")));
 app.use(express.json());
@@ -32,6 +33,7 @@ const uploader = multer({
 });
 
 const aws = require("aws-sdk");
+const { DataBrew } = require("aws-sdk");
 app.get("/images", (req, res) => {
     getImage().then((result) => {
         return res.send(result);
@@ -40,6 +42,7 @@ app.get("/images", (req, res) => {
 
 app.post("/images", uploader.single("file"), (req, res) => {
     console.log(req.file, "req file");
+    console.log(req.body, "req body");
 
     const { filename, mimetype, size, path } = req.file;
 
@@ -57,7 +60,12 @@ app.post("/images", uploader.single("file"), (req, res) => {
     promise
         .then(() => {
             console.log("success");
-            // it worked!!!
+            db.addImage({
+                url: `https://s3.amazonaws.com/spicedling/${req.file.filename}`,
+                title: req.body.title,
+                description: req.body.description,
+                username: req.body.username,
+            });
             res.json({});
         })
         .catch((err) => {
