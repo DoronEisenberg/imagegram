@@ -1,9 +1,22 @@
-* {
+* body {
     padding: 30;
     margin: 30;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
     color: #82ac9f;
+    color: white;
+    display: flex;
+    background-color: #161616;
+
+    align-items: center;
+    justify-items: center;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-items: center;
 }
 
 header {
@@ -25,22 +38,17 @@ div.cont_cards {
     justify-items: center;
 }
 .form {
-    display: grid;
+    display: flex;
     height: 30px;
     background-color: pink;
     font-family: "Roboto", sans-serif;
 }
 
-body {
-    display: flex;
-    background-color: #161616;
-    font-family: "Roboto", sans-serif;
-    color: white;
-}
 img {
     height: 200px;
     width: 200px;
 }
+
 .card_cards {
     display: flex;
 }
@@ -52,7 +60,37 @@ img {
     justify-items: center;
 }
 div.hey {
-    display: grid;
+    display: flexbox;
+    background-color: whitesmoke;
+    color: black;
     height: 337px;
     width: 200px;
+}
+
+h4 {
+    color: black;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: black;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+}
+.modal img {
+    width: 500px;
+    height: 500px;
+    object-fit: contain;
+}
+
+.modal .close {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 20px;
+    font-size: 30px;
+    cursor: pointer;
 }

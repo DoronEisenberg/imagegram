@@ -18,8 +18,8 @@
             <header>
             <h1>Upload Your images</h1>
             </header>
-            <form
-                
+        <body>
+            <form 
                 enctype="multipart/form-data"
                 @submit.prevent="onFormSubmit"
             >
@@ -33,24 +33,32 @@
                 <input type="submit" v-on:click="uploadImage" value="Upload!" class="btn-submit" />
             </form>
             <div class="status">{{ message }}</div>
-        <body>
+
             <div class="cont_cards">
-        <div class="hey"  v-for="image in images">
-                
-                    <img :class="cardCSS" :src="image.url" />
+         <div class="hey"   v-for="image in images">
+                    <!--  adding data-id property from the image object, so we can read it on the on click event  -->
+                    <img @click="zoom" :class="cardCSS" :src="image.url" :data-id="image.id"/>
                      <div v-if="post" class="content"></div>
                     <h4>{{ image.title }}</h4>
-           <!--     
+                
+    
+                    <!-- Here is the comment and free writing form field -->
            <h3 class="secondClass" :class="headlineCss">{{ headline }}</h3>
-            <ul v-for="city of cities">
+            <ul v-for="city in cities">
                 <li>{{city.name}} in {{city.country}}</li>
             </ul>
             Comment:  {{firstName}}<br />
             <input class=" form" type="text" v-model="firstName" name="firstName" id="">
             
-             <button class="button" v-on:click="increaseCount">Click me({{count}})</button> --> 
-
-        </div></div>
+             <!--<button class="button" v-on:click="increaseCount">Click me({{count}})</button> --> 
+            
+            </div>
+        </div>
+         <div v-if="currentimage" class="modal-mask">
+            <modal v-bind:currentimage="currentimage" @close="currentimage = false" ></modal>
+           
+        </div>
+  
         <script
             src="/js/app.js"
             type="module"
