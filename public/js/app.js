@@ -29,6 +29,7 @@ Vue.createApp({
             formData.append("description", this.description);
             formData.append("username", this.username);
             // console.log("this.title", this.title);
+
             fetch("/images", {
                 method: "POST",
                 body: formData,
@@ -43,7 +44,7 @@ Vue.createApp({
         },
         zoom: function (event) {
             //getting the value of the data-id that is saved in the <img> element
-            parseInt;
+
             let imageid = parseInt(event.target.getAttribute("data-id"));
 
             let found = this.images.filter((image) => image.id === imageid);
@@ -51,6 +52,8 @@ Vue.createApp({
         },
     },
     mounted() {
+        //request all images from the server and save them to the image var in the  app.js component
+
         fetch("/images")
             .then((res) => {
                 return res.json();

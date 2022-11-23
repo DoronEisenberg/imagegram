@@ -4,61 +4,90 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Image Board</title>
-        <link rel="stylesheet" href="style.css">
-        
-       
+        <link rel="stylesheet" href="style.css" />
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
     </head>
-
-    <script>
-       // console.log(document.getElementsByClassName("headlineClass"));   
-    </script>
     <body>
-        
-        <div id="main">
+        <div id="main" class="container">
             <header>
-            <h1>Upload Your images</h1>
+                <h1>Doron's Instegram</h1>
+                <h5>Single page project</h5>
             </header>
-        <body>
-            <form 
-                enctype="multipart/form-data"
-                @submit.prevent="onFormSubmit"
-            >
-                <div class="form-row">
-                    <input type="text" v-model="title" placeholder="Title"/> 
-                    <input type="text" v-model="description" placeholder="Description"/>  
-                    <input type="text" v-model="username" placeholder="User Name"/>
-                    <label for="photo">Select your file</label>
-                    <input type="file" name="photo" id="photo" />
-                </div>
-                <input type="submit" v-on:click="uploadImage" value="Upload!" class="btn-submit" />
-            </form>
-            <div class="status">{{ message }}</div>
+            <div>
+                <form
+                    id="image-form"
+                    enctype="multipart/form-data"
+                    @submit.prevent="onFormSubmit"
+                >
+                    <div class="form-row">
+                        <input
+                            type="text"
+                            v-model="title"
+                            placeholder="Title"
+                        />
+                        <input
+                            type="text"
+                            v-model="description"
+                            placeholder="Description"
+                        />
+                        <input
+                            type="text"
+                            v-model="username"
+                            placeholder="User Name"
+                        />
+                        <label for="photo"
+                            >Select your file
+                            <input type="file" name="photo" id="photo" />
+                        </label>
+                    </div>
+                    <input
+                        type="submit"
+                        v-on:click="uploadImage"
+                        value="Upload!"
+                        class="btn-submit"
+                    />
+                </form>
+                <div class="status">{{ message }}</div>
 
-            <div class="cont_cards">
-         <div class="hey"   v-for="image in images">
-                    <!--  adding data-id property from the image object, so we can read it on the on click event  -->
-                    <img @click="zoom" :class="cardCSS" :src="image.url" :data-id="image.id"/>
-                     <div v-if="post" class="content"></div>
-                    <h4>{{ image.title }}</h4>
-                
-    
-                    <!-- Here is the comment and free writing form field -->
-           <h3 class="secondClass" :class="headlineCss">{{ headline }}</h3>
-            <ul v-for="city in cities">
-                <li>{{city.name}} in {{city.country}}</li>
-            </ul>
-            Comment:  {{firstName}}<br />
-            <input class=" form" type="text" v-model="firstName" name="firstName" id="">
-            
-             <!--<button class="button" v-on:click="increaseCount">Click me({{count}})</button> --> 
-            
+                <div class="cards">
+                    <div class="card" v-for="image in images">
+                        <div class="card-cont">
+                            <h4>{{ image.title }}</h4>
+                            <!--  adding data-id property from the image object, so we can read it on the on click event  -->
+                            <img
+                                @click="zoom"
+                                :class="cardCSS"
+                                :src="image.url"
+                                :data-id="image.id"
+                            />
+
+                            <h4 class="bottom">{{ image.description }}</h4>
+
+                            <button
+                                id="more"
+                                type="button"
+                                value="submit"
+                                onClick="document.getElementById('datepicker').focus()"
+                            >
+                                Like
+                            </button>
+                        </div>
+
+                        <!--<button class="button" v-on:click="increaseCount">Click me({{count}})</button> -->
+                    </div>
+                </div>
+            </div>
+            <div v-if="currentimage" class="modal-mask">
+                <modal
+                    v-bind:currentimage="currentimage"
+                    @close="currentimage = false"
+                ></modal>
             </div>
         </div>
-         <div v-if="currentimage" class="modal-mask">
-            <modal v-bind:currentimage="currentimage" @close="currentimage = false" ></modal>
-           
-        </div>
-  
         <script
             src="/js/app.js"
             type="module"
