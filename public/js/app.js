@@ -1,5 +1,5 @@
 import * as Vue from "./vue.js";
-import modal from "./modal.js";
+import modal from "./components/modal.js";
 
 Vue.createApp({
     components: {

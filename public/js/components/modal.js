@@ -8,15 +8,21 @@ const modal = {
             username: "",
         };
     },
-    methods: {},
+    methods: {
+        close() {
+            console.log("closeaction");
+            this.$emit("close");
+        },
+    },
+
     props: ["currentimage"],
     mounted() {
-        // console.log("imageId in mounted", this.imageId);
         console.log(this.currentimage);
     },
     template: `<div class="modal">
-    <div class='close'>x</div>
+    <button @click="close" class='close' >x</button>
     <img :src="currentimage.url"/>
+    
     </div>`,
 };
 export default modal;
