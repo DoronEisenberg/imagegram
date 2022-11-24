@@ -2,7 +2,8 @@ const spicedPg = require("spiced-pg");
 require("dotenv").config();
 
 const db = spicedPg(
-    `postgres:${process.env.USER}:${process.env.PASS}@localhost:5432/${process.env.DATABASE}`
+    process.env.DATABASE_URL ||
+        `postgres:${process.env.USER}:${process.env.PASS}@localhost:5432/${process.env.DATABASE}`
 );
 
 //frmo table images select all and return all rows
@@ -49,15 +50,3 @@ module.exports.addComment = ({ comment, username, image_id }) => {
             return result.rows[0];
         });
 };
-
-/*
-module.exports.addContent = ({ url, username, title, description}) => {
-    return db
-        .query(
-            `INSERT INTO images ("url", "username", "title", "description") VALUES
-    VALUES ($1, $2, $3)
-    RETURNING id`,
-            [url, username, title, description]
-        )
-        .then((result) => result.rows[0]); 
-};*/
